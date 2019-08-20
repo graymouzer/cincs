@@ -1,0 +1,189 @@
+#								Sambabool="Maybe"
+#	
+#								while [[ $Samabool -ne "Y" ]] && [[ $Samabool -ne "N" ]]
+#								do
+#									read -p "If you would like samba to be able to read  all the files on your system type the number of your selection: : " tmpbool
+#									echo $tmpbool
+#									Samabool=$(echo $tmpbool | tr '[:lower:]' '[:upper:]')
+#									echo "Sambabool should have been set to the value of tmpbool it is " $Sambabool	
+#									sleep 2
+#									tmpbool=""
+#									echo "tmpbool reset is" $tmpbool
+#								done
+#								echo $PersistanceFlag "before question"		
+##						if [[ $Samabool -eq "Y" ]]
+##									then
+#							while [[ $PersistanceFlag != "Y" ]] && [[ $PersistanceFlag != "N" ]]
+#								do
+#									read -p "Would you like to make this change persistant between reboots type Y or N: " tmpbool
+#									echo "now tmpbool is " $tmpbool
+#									PersistanceFlag=`echo $tmpbool | tr '[:lower:]' '[:upper:]'`
+#									echo "now PeristanceFlag should be an uppercase " $tmpbool
+#									tmpbool=""
+#								done
+#								if [[ $PersistanceFlag -eq "Y" ]]
+#									then
+#										if [[ $Sambabool -eq "Y" ]]
+#											then 
+#												echo "about to add to the array"
+#												bools[$i]=`echo $curbool$on`
+#												echo ${bools[*]}
+#										elif [[ $Sambabool -eq "N" ]]
+#											then
+#												echo "about to add to the array"
+#												bools[$i]=`echo $curbool$off`
+#												echo ${bools[$i]}
+#										fi
+#								else
+#									if [[ $Samabool -eq "Y" ]] 
+#										then
+#											echo "Setting boolean to on"
+#											setsebool samba_export_all_ro 1 && echo "$curbool set to on"
+#										else
+#											echo "Setting boolean to off"
+#											setsebool samba_export_all_ro 0 && echo "samba_export_all_ro set to off"
+#									fi
+#								fi
+#								
+
+#								Sambabool="Maybe"
+#								PersistanceFlag="Maybe"
+#								while [[ $Samabool != "Y" ]] && [[ $Samabool != "N" ]]
+#								do
+#									read -p "If you would like samba to be able to read  all the files on your system type the number of your selection: : " tmpbool
+#									Samabool=`echo $tmpbool | tr '[:lower:]' '[:upper:]'`
+#									tmpbool=""
+#								done
+##								if [[ $Samabool -eq "Y" ]]
+##									then
+#								while [[ $PersistanceFlag != "Y" ]] && [[ $PersistanceFlag != "N" ]]
+#								do
+#									read -p "Would you like to make this change persistant between reboots type Y or N: " tmpbool
+#									PersistanceFlag=`echo $tmpbool | tr '[:lower:]' '[:upper:]'`
+#									tmpbool=""
+#								done
+#								if [[ $PersistanceFlag -eq "Y" ]]
+#									then
+#										if [[ $Sambabool -eq "Y" ]]
+#											then 
+#												echo "about to add to the array"
+#												bools[$i]=`echo $curbool$on`
+#												echo ${bools[*]}
+#										elif [[ $Sambabool -eq "N" ]]
+#											then
+#												echo "about to add to the array"
+#												bools[$i]=`echo $curbool$off`
+#												echo ${bools[$i]}
+#										fi
+#								else
+#									if [[ $Samabool -eq "Y" ]] 
+#										then
+#											echo "Setting boolean to on"
+#											setsebool samba_export_all_ro 1 && echo "$curbool set to on"
+#										else
+#											echo "Setting boolean to off"
+#											setsebool samba_export_all_ro 0 && echo "samba_export_all_ro set to off"
+#									fi
+#								fi
+#								((i++))
+#								echo "i is "$i
+#								tmpbool="Maybe"
+#								Samabool="Maybe" #reset the variables so we don't get unexpected results if we reenter the menu
+#							#	sleep 2
+#								while [[ $Samabool != "Y" ]] && [[ $Samabool != "N" ]]
+#								do
+#									read -p "If you would like samba to be able to read and write all the files on your system type the number of your selection: : " tmpbool
+#									Samabool=`echo $tmpbool | tr '[:lower:]' '[:upper:]'`
+#									tmpbool=""
+#								done
+##								if [[ $Samabool -eq "Y" ]]
+##									then
+#								while [[ $PersistanceFlag != "Y" ]] && [[ $PersistanceFlag != "N" ]]
+#								do
+#								read -p "Would you like to make this change persistant between reboots type Y or N: " tmpbool
+#								PersistanceFlag=`echo $tmpbool | tr '[:lower:]' '[:upper:]'`
+#								tmpbool=""
+#								done
+#								if [[ $PersistanceFlag -eq "Y" ]]
+#									then
+#										if [[ $Sambabool -eq "Y" ]]
+#											then 
+#												bools[$i]=`echo $curbool$on`
+#												echo ${bools[*]}
+#												
+#										elif [[ $Sambabool -eq "N" ]]
+#											then
+#												bools[$i]=`echo $curbool$off`
+#												echo ${bools[*]}
+#										fi
+#								else
+#									if [[ $Samabool -eq "Y" ]] 
+#										then
+#											echo "Setting boolean to on"
+#											setsebool $curbool 1 && echo "$curbool set to on"
+#										else
+#											echo "Setting boolean to off"
+#											setsebool $curbool 0 && echo "$curbool to off"
+#									fi
+#								fi
+#								((i++))
+
+				# Get rid of any old sambashares lists
+#				if [ -e $CincsDir/sambashares.txt ]; then 
+#				rm -f $CincsDir/sambashares.txt
+#				fi
+#				#Get all of the share labels and the paths to the shares in them and output those to a text file
+#				readarray -t dirs < <( awk '               /^\[/ { gsub(/[][]/,""); gr=$0; }
+#                        	/^[ \t]*path[ \t]*=/ { gsub(/^[ \t]*path[ \t]*=[ \t]*/, "" );
+#                                               print gr"|"$0; }' /etc/samba/smb.conf ) 
+#				for x in "${dirs[@]}"; do printf -- "%s: %s \n" "${x%%|*}" "${x#*|}"; done >> $CincsDir/sambashares.txt
+#				
+
+				#Now that the above more or less works we need to offer to change it
+
+
+#This might be useful for showing a list of runlevels but needs more work ## pretty happy to have it this far along though
+#
+## chkconfig | awk 
+#{for(i=0; i<=NF; ++i){ if ($i ~ /on/)  print $i}}
+
+
+
+
+
+
+#check the existance of the conf file for that service and set a variable based on that
+
+# Generate a list for the main menu of services installed and with config files and use a while loop to choose between the following
+
+# option 1 view all booleans on the system
+# option 2 view booleans for supported services
+#	Apache
+#		allow_httpd_anon_write
+#		allow_httpd_mod_auth_ntlm_winbind
+#		allow_httpd_mod_auth_pam
+#		allow_httpd_sys_script_anon_write
+#		httpd_builtin_scripting
+#		httpd_can_check_spam
+#		httpd_can_network_connect
+#		httpd_can_network_connect_cobbler
+#		httpd_can_network_connect_db
+
+#								tmpbool="Maybe"
+#								Samabool="Maybe" #reset the variables so we don't get unexpected results if we reenter the menu
+							#	sleep 2
+# allow_smbd_anon_write
+#								while [[ $Samabool != "Y" ]] && [[ $Samabool != "N" ]]
+#								do
+#									read -p "If you would like samba to be able to read all the files on your system type the number of your selection: : " tmpbool
+#									Samabool=`echo $tmpbool | tr '[:lower:]' '[:upper:]'`
+#								done
+#								if [[ $Samabool -eq "Y" ]]
+#									then
+#										echo "Setting boolean to on"
+#										setsebool -P samba_export_all_ro 1 && echo "samba_export_all_ro set to on"
+#									else
+#										echo "Setting boolean to off"
+#										setsebool -P samba_export_all_ro 0
+#								fi
+

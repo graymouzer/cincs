@@ -1,0 +1,30 @@
+#!/bin/bash
+read -p "Which service do you wish to see?" serv
+servs="$serv-bool-script"
+if [ -f $servs ];then
+	echo "creating new script file."
+	echo "#!/bin/bash" > $servs
+	echo "echo \"we are now going to work with \" ${serv} \". We will now set the booleans of your choice.\" ">> $servs
+fi
+IFS=$'\r\n' boolser=($(getsebool -a | grep $serv | cut -d- -f1 | cut -d ' ' -f1))
+for (( f=0; f<=${#boolser[@]}; f++ ));do
+	if [ ${boolser[$f]} > /dev/null ];then
+		while true; do
+			read -p "Set ${boolser[$f]} (0/1) " yn
+			case $yn in
+				0) echo "setsebool -P ${boolser[$f]} 0" >> $servs
+				   echo "echo \"The selinux boolean\" ${boolser[$f]} \"has been set to 0.\" ">> $servs
+				   break;;
+				1) echo "setsebool -P ${boolser[$f]} 1" >> $servs
+				   echo "echo \"The selinux boolean\" ${boolser[$f]} \"has been set to 1.\" ">> $servs
+				   break;;
+				*) echo "$yn is not a 0 or a 1";;
+			esac
+		done
+	else
+		unset ${boolser[$f]}
+	fi
+done
+echo "getsebool -a | grep $serv | less" >> $servs
+chmod 755 $servs
+gnome-terminal -x ./$servs
